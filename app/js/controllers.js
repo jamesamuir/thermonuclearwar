@@ -2,7 +2,16 @@
 
 /* Controllers */
 
+
+function NavigationCtrl($scope, $location){
+    //required to high light the active navigational point
+    $scope.location = $location;
+}
+
 function HomeCtrl($scope){
+
+
+
     $scope.test = "testdata";
 }
 
@@ -28,6 +37,8 @@ function MapCtrl($scope){
         clickedLatitudeProperty: null,
         clickedLongitudeProperty: null
     });
+
+
 
 
 }
