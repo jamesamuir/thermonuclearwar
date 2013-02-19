@@ -1,9 +1,20 @@
 'use strict';
 
-/* Services */
 
 
-// Demonstrate how to register services
-// In this case it is a simple value service.
-angular.module('myApp.services', []).
-  value('version', '0.1');
+app.factory('mapToolService', function($rootScope) {
+    var mapToolService = {};
+
+    mapToolService.mapTool = "";
+
+    mapToolService.getMapTool = function() {
+        return mapToolService.mapTool;
+    };
+
+    mapToolService.setMapTool = function(value) {
+        mapToolService.mapTool = value;
+        $rootScope.$broadcast('changeTool');
+    };
+
+    return mapToolService;
+});

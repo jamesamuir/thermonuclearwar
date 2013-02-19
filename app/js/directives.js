@@ -16,8 +16,8 @@ var googleMapsModule = angular.module("google-maps", []);
 /**
  * Map directive
  */
-googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", function ($log, $timeout,
-                                                                                  $filter) {
+googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapToolService", function ($log, $timeout,
+                                                                                  $filter, mapToolService) {
 
     return {
         restrict: "EC",
@@ -33,6 +33,8 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", function
             zoom: "=zoom", // optional, default 8
             refresh: "&refresh", // optional
             windows: "=windows" // optional"
+
+
         },
         controller: function ($scope, $element) {
 
@@ -110,33 +112,41 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", function
                 });
             });
 
-            if (attrs.markClick == "true") {
+            //Set click function for markers
                 (function () {
                     var cm = null;
 
 
-
                     _m.on("click", function (e) {
-                        if (cm == null) {
 
-                            cm = {
-                                latitude: e.latLng.lat(),
-                                longitude: e.latLng.lng()
-                            };
+                        alert(mapToolService.getMapTool());
 
-                            scope.markers.push(cm);
+                        if (mapToolService.getMapTool() == "mapTool.ADDMARKER") {
+
+                            if (cm == null) {
+
+                                cm = {
+                                    latitude: e.latLng.lat(),
+                                    longitude: e.latLng.lng()
+                                };
+
+                                scope.markers.push(cm);
+                            }
+                            else {
+
+                                cm.latitude = e.latLng.lat();
+                                cm.longitude = e.latLng.lng();
+
+                                scope.markers.push(cm);
+                            }
+
+                            $timeout(function () {
+                                scope.$apply();
+                            });
                         }
-                        else {
-                            cm.latitude = e.latLng.lat();
-                            cm.longitude = e.latLng.lng();
-                        }
-
-                        $timeout(function () {
-                            scope.$apply();
-                        });
                     });
                 }());
-            }
+
 
             // Put the map into the scope
             scope.map = _m;
@@ -162,6 +172,18 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", function
                     angular.forEach(newValue, function (v, i) {
                         if (!_m.hasMarker(v.latitude, v.longitude)) {
                             _m.addMarker(v.latitude, v.longitude);
+
+                            var marker = _m.findMarker(v.latitude, v.longitude);
+                            google.maps.event.addListener(marker, 'click', function() {
+                                if (mapToolService.getMapTool() == "mapTool.REMOVEMARKER"){
+
+                                    var markers = [];
+                                    markers.push(marker);
+                                    _m.removeMarkers(markers);
+                                }
+                            });
+
+
                         }
                     });
 
@@ -189,9 +211,9 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", function
                         }
 
                         // Marker in map has not been found in scope. Remove.
-                        if (!found) {
+                        /*if (!found) {
                             orphaned.push(v);
-                        }
+                        }*/
                     });
 
                     _m.removeMarkers(orphaned);

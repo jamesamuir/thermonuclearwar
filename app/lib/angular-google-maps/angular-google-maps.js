@@ -97,6 +97,7 @@
 
 
 
+
                     google.maps.event.addListener(_instance, "dragstart",
 
                         function () {
@@ -181,8 +182,7 @@
                 });
             };
 
-            this.addMarker = function (lat, lng, label, url,
-                                       thumbnail) {
+            this.addMarker = function (lat, lng, label, url, thumbnail) {
 
                 if (that.findMarker(lat, lng) != null) {
                     return;
@@ -200,6 +200,8 @@
                 if (url) {
 
                 }
+
+
 
                 // Cache marker
                 _markers.unshift(marker);
@@ -262,7 +264,7 @@
             };
 
             this.removeMarkers = function (markerInstances) {
-
+  
                 var s = this;
 
                 angular.forEach(markerInstances, function (v, i) {

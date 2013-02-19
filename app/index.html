@@ -60,8 +60,13 @@
                     <li ng-class="{active: location.path() == '/home'}"><a href="#/home">Home</a></li>
                     <li ng-class="{active: location.path() == '/map'}"><a href="#/map">Map</a></li>
                     <li ng-class="{active: location.path() == '/contact'}"><a href="#contact">Contact</a></li>
-                    <li ng-show="location.path() == '/map'"><a href="#contact">Add Maker</a></li>
-                    <li>{{location.path() == '/map'}}</li>
+                    <li ng-show="location.path() == '/map'">
+                        <a href="#contact" ng-click="setAddMarker($event)" ng-class="{mapToolActive: mapTool == 'mapTool.ADDMARKER'}">Add Marker</a>
+                    </li>
+                    <li ng-show="location.path() == '/map'">
+                        <a href="#contact" ng-click="setRemoveMarker($event)" ng-class="{mapToolActive: mapTool == 'mapTool.REMOVEMARKER'}">Remove Marker</a>
+                    </li>
+                    <li>{{mapTool}}</li>
 
                 </ul>
             </div><!--/.nav-collapse -->

@@ -3,14 +3,37 @@
 /* Controllers */
 
 
-function NavigationCtrl($scope, $location){
+function NavigationCtrl($scope, $location, mapToolService){
     //required to high light the active navigational point
     $scope.location = $location;
+
+    $scope.mapTool = ""
+
+
+    //Set mapTool functions
+    $scope.setAddMarker = function(event){
+        event.preventDefault();
+        this.setMapTool("mapTool.ADDMARKER");
+    }
+
+    $scope.setRemoveMarker = function(event){
+        event.preventDefault();
+        this.setMapTool("mapTool.REMOVEMARKER");
+    }
+
+    $scope.setMapTool = function(mapTool){
+        if (mapToolService.getMapTool() == mapTool){
+            $scope.mapTool = "";
+        }else{
+            $scope.mapTool = mapTool;
+        }
+        mapToolService.setMapTool($scope.mapTool);
+    }
+
+
 }
 
 function HomeCtrl($scope){
-
-
 
     $scope.test = "testdata";
 }
@@ -37,9 +60,6 @@ function MapCtrl($scope){
         clickedLatitudeProperty: null,
         clickedLongitudeProperty: null
     });
-
-
-
 
 }
 
