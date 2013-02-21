@@ -16,8 +16,8 @@ var googleMapsModule = angular.module("google-maps", []);
 /**
  * Map directive
  */
-googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapToolService", function ($log, $timeout,
-                                                                                  $filter, mapToolService) {
+googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapToolService", "mapSearchService", function ($log, $timeout,
+                                                                                  $filter, mapToolService, mapSearchService) {
 
     return {
         restrict: "EC",
@@ -32,7 +32,8 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapTool
             longitude: "=longitude", // required
             zoom: "=zoom", // optional, default 8
             refresh: "&refresh", // optional
-            windows: "=windows" // optional"
+            windows: "=windows", // optional"
+            centerlabel: "=centerlabel"
 
 
         },
@@ -43,6 +44,26 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapTool
             self.addInfoWindow = function (lat, lng, content) {
                 _m.addInfoWindow(lat, lng, content);
             };
+
+
+            //Listen for update of map center and set it to the new coords
+            $scope.$on('updateMapCenter', function(listener) {
+
+                //Get and remove old center marker
+                var marker = $scope.map.findMarker($scope.center.lat, $scope.center.lng)
+                if (marker != null){
+                    var markers = [];
+                    markers.push(marker);
+                    $scope.map.removeMarkers(markers);
+                }
+
+                //Add new center marker
+                $scope.center.lat = mapSearchService.getSearchLat();
+                $scope.center.lng = mapSearchService.getSearchLng();
+                $scope.zoom = 8;
+                $scope.map.addMarker($scope.center.lat, $scope.center.lng, mapSearchService.getFormattedAddress());
+
+            });
         },
         link: function (scope, element, attrs, ctrl) {
 
@@ -119,7 +140,7 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapTool
 
                     _m.on("click", function (e) {
 
-                        alert(mapToolService.getMapTool());
+                        //alert(mapToolService.getMapTool());
 
                         if (mapToolService.getMapTool() == "mapTool.ADDMARKER") {
 
@@ -139,6 +160,9 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapTool
 
                                 scope.markers.push(cm);
                             }
+
+
+
 
                             $timeout(function () {
                                 scope.$apply();

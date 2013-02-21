@@ -44,6 +44,8 @@
         return (Math.abs(f1 - f2) < 0.000001);
     }
 
+
+
     /*
      * Create the model in a self-contained class where map-specific logic is
      * done. This model will be used in the directive.
@@ -64,6 +66,7 @@
 
             var _instance = null,
                 _markers = [],  // caches the instances of google.maps.Marker
+                _overlays = [],
                 _handlers = [], // event handlers
                 _windows = [],  // InfoWindow objects
                 o = angular.extend({}, _defaults, opts),
@@ -75,6 +78,8 @@
             this.dragging = false;
             this.selector = o.container;
             this.markers = [];
+            this.overlays = [];
+
 
             this.draw = function () {
 
@@ -162,6 +167,8 @@
                 }
             };
 
+
+            //Fit the map extent to contain of the markers
             this.fit = function () {
                 if (_instance && _markers.length) {
 
@@ -175,6 +182,9 @@
                 }
             };
 
+
+
+
             this.on = function(event, handler) {
                 _handlers.push({
                     "on": event,
@@ -182,7 +192,11 @@
                 });
             };
 
+
+            //Add marker to map
             this.addMarker = function (lat, lng, label, url, thumbnail) {
+
+
 
                 if (that.findMarker(lat, lng) != null) {
                     return;
@@ -200,9 +214,6 @@
                 if (url) {
 
                 }
-
-
-
                 // Cache marker
                 _markers.unshift(marker);
 
@@ -264,7 +275,7 @@
             };
 
             this.removeMarkers = function (markerInstances) {
-  
+
                 var s = this;
 
                 angular.forEach(markerInstances, function (v, i) {

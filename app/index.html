@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,44 +41,54 @@
 
 <body ng-app="myApp">
 
+<img src="./theme/img/mushroom-cloud.jpg" class="bg">
 
-<div class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavigationCtrl">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="#">Project name</a>
-            <div class="nav-collapse collapse">
-                <p class="navbar-text pull-right">
-                    Logged in as <a href="#" class="navbar-link">Username</a>
-                </p>
-                <ul class="nav">
-                    <li ng-class="{active: location.path() == '/home'}"><a href="#/home">Home</a></li>
-                    <li ng-class="{active: location.path() == '/map'}"><a href="#/map">Map</a></li>
-                    <li ng-class="{active: location.path() == '/contact'}"><a href="#contact">Contact</a></li>
-                    <li ng-show="location.path() == '/map'">
-                        <a href="#contact" ng-click="setAddMarker($event)" ng-class="{mapToolActive: mapTool == 'mapTool.ADDMARKER'}">Add Marker</a>
-                    </li>
-                    <li ng-show="location.path() == '/map'">
-                        <a href="#contact" ng-click="setRemoveMarker($event)" ng-class="{mapToolActive: mapTool == 'mapTool.REMOVEMARKER'}">Remove Marker</a>
-                    </li>
-                    <li>{{mapTool}}</li>
+<div id="page-wrap">
 
-                </ul>
-            </div><!--/.nav-collapse -->
+    <div class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavigationCtrl">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="#">Thermonuclear War</a>
+                <div class="nav-collapse collapse">
+
+
+                    <form class="navbar-form pull-right">
+                        <input class="span2" type="text" placeholder="Location" ng-model="searchText">
+                        <button type="submit" class="btn" ng-click="searchLocation()">Search</button>
+                    </form>
+
+
+
+                    <ul class="nav">
+                        <li ng-class="{active: location.path() == '/home'}"><a href="#/home">Home</a></li>
+                        <li ng-class="{active: location.path() == '/map'}"><a href="#/map">Map</a></li>
+                        <li ng-class="{active: location.path() == '/contact'}"><a href="#contact">Contact</a></li>
+                        <li ng-show="location.path() == '/map'">
+                            <a href="#contact" ng-click="setAddMarker($event)" ng-class="{mapToolActive: mapTool == 'mapTool.ADDMARKER'}">Add Marker</a>
+                        </li>
+                        <li ng-show="location.path() == '/map'">
+                            <a href="#contact" ng-click="setRemoveMarker($event)" ng-class="{mapToolActive: mapTool == 'mapTool.REMOVEMARKER'}">Remove Marker</a>
+                        </li>
+
+
+                    </ul>
+
+                </div><!--/.nav-collapse -->
+            </div>
         </div>
+        <!--<div style="height:100px; width:100%; background-color:#AAAAAA;">{{searchResults  | json}}</div>-->
     </div>
+
+    <div class="container-fluid">
+        <div ng-view></div>
+    </div><!--/.fluid-container-->
+
 </div>
-
-<div class="container-fluid">
-
-    <div ng-view></div>
-
-
-</div><!--/.fluid-container-->
 
 <!-- Le javascript
 ================================================== -->
@@ -91,6 +100,8 @@
 <script src="js/controllers.js"></script>
 <script src="js/filters.js"></script>
 <script src="js/directives.js"></script>
+<script src="js/util.js"></script>
+<script src="js/bomb.js"></script>
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
 
 

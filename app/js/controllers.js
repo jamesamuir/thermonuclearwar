@@ -3,11 +3,32 @@
 /* Controllers */
 
 
-function NavigationCtrl($scope, $location, mapToolService){
+function NavigationCtrl($scope, $location, $http, mapToolService, mapSearchService){
     //required to high light the active navigational point
     $scope.location = $location;
 
     $scope.mapTool = ""
+
+    $scope.searchResults = "";
+
+    //Search location
+    $scope.searchLocation = function(){
+        mapSearchService.searchLocation($scope.searchText);
+
+        /*var url = 'http://maps.googleapis.com/maps/api/geocode/json?address=' + formatAddressString($scope.searchText) + '&sensor=false';
+        alert(url);
+        $http({method: 'GET', url: url}).
+            success(function(data, status, headers, config) {
+                //alert(status + " | good");
+                //Set address text
+                alert(data.status);
+                $scope.searchResults = data;
+            }).
+            error(function(data, status, headers, config) {
+                alert(status + " | bad");
+            });*/
+
+    }
 
 
     //Set mapTool functions
@@ -43,22 +64,24 @@ function MapCtrl($scope){
 
         /** the initial center of the map */
         centerProperty: {
-            lat: 45,
-            lng: -73
+            lat:  27.50,
+            lng: -98.35
         },
 
         /** the initial zoom level of the map */
-        zoomProperty: 8,
+        zoomProperty:4,
 
         /** list of markers to put in the map */
-        markersProperty: [ {
-            latitude: 45,
-            longitude: -74
-        }],
+        markersProperty: [ ],
+
+        /** list of overlays to put in the map */
+        overlaysProperty: [ ],
 
         // These 2 properties will be set when clicking on the map
         clickedLatitudeProperty: null,
-        clickedLongitudeProperty: null
+        clickedLongitudeProperty: null,
+
+        centerLabelProperty: "Center Point"
     });
 
 }
