@@ -66,7 +66,7 @@
 
             var _instance = null,
                 _markers = [],  // caches the instances of google.maps.Marker
-                _overlays = [],
+                _polygons = [],
                 _handlers = [], // event handlers
                 _windows = [],  // InfoWindow objects
                 o = angular.extend({}, _defaults, opts),
@@ -78,10 +78,12 @@
             this.dragging = false;
             this.selector = o.container;
             this.markers = [];
-            this.overlays = [];
+            this.polygons = [];
 
 
             this.draw = function () {
+
+
 
                 if (that.center == null) {
                     // TODO log error
@@ -183,14 +185,14 @@
             };
 
 
-
-
             this.on = function(event, handler) {
                 _handlers.push({
                     "on": event,
                     "handler": handler
                 });
             };
+
+
 
 
             //Add marker to map
@@ -206,6 +208,8 @@
                     position: new google.maps.LatLng(lat, lng),
                     map: _instance
                 });
+
+
 
                 if (label) {
 
@@ -292,6 +296,24 @@
                     v.setMap(null);
                 });
             };
+
+
+
+
+
+
+            //Add polygon to map
+            this.addPolygon = function (polygon) {
+
+                polygon.setMap(_instance);
+                return polygon;
+            };
+
+
+
+
+
+
         }
 
         // Done

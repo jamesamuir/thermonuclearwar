@@ -28,6 +28,7 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapTool
         scope: {
             center: "=center", // required
             markers: "=markers", // optional
+            polygons: "=polygons",
             latitude: "=latitude", // required
             longitude: "=longitude", // required
             zoom: "=zoom", // optional, default 8
@@ -64,6 +65,8 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapTool
                 $scope.map.addMarker($scope.center.lat, $scope.center.lng, mapSearchService.getFormattedAddress());
 
             });
+
+
         },
         link: function (scope, element, attrs, ctrl) {
 
@@ -151,18 +154,24 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapTool
                                     longitude: e.latLng.lng()
                                 };
 
-                                scope.markers.push(cm);
+                                //scope.markers.push(cm);
                             }
                             else {
 
                                 cm.latitude = e.latLng.lat();
                                 cm.longitude = e.latLng.lng();
 
-                                scope.markers.push(cm);
+                                //scope.markers.push(cm);
                             }
 
 
+                            var blastPolys = GetBlastPolygons(75000, cm.latitude, cm.longitude);
+                            angular.forEach(blastPolys, function(p, i){
+                                _m.addPolygon(p);
+                            })
 
+
+                            scope.markers.push(cm);
 
                             $timeout(function () {
                                 scope.$apply();
@@ -174,6 +183,11 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapTool
 
             // Put the map into the scope
             scope.map = _m;
+
+
+
+
+
 
             // Check if we need to refresh the map
             if (angular.isUndefined(scope.refresh())) {
@@ -188,6 +202,12 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapTool
                 });
             }
 
+
+
+
+
+
+
             // Markers
             scope.$watch("markers", function (newValue, oldValue) {
 
@@ -197,6 +217,8 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapTool
                         if (!_m.hasMarker(v.latitude, v.longitude)) {
                             _m.addMarker(v.latitude, v.longitude);
 
+                            //***********CUSTOM**********
+                            //Add the event listener to remove the marker if the tool is chosen
                             var marker = _m.findMarker(v.latitude, v.longitude);
                             google.maps.event.addListener(marker, 'click', function() {
                                 if (mapToolService.getMapTool() == "mapTool.REMOVEMARKER"){
@@ -250,6 +272,8 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapTool
                 });
 
             }, true);
+
+
 
 
             // Update map when center coordinates change

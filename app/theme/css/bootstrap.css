@@ -5840,3 +5840,8 @@ img.bg {
 .mapToolActive{
     color:#319B13 !important;
 }
+
+
+.google-map img{max-width: inherit;}
+.google-map label { width: auto; display:inline; }
+.google-map img { max-width: none; }

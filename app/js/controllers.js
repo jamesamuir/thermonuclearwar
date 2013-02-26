@@ -34,6 +34,7 @@ function NavigationCtrl($scope, $location, $http, mapToolService, mapSearchServi
     //Set mapTool functions
     $scope.setAddMarker = function(event){
         event.preventDefault();
+
         this.setMapTool("mapTool.ADDMARKER");
     }
 
@@ -75,7 +76,7 @@ function MapCtrl($scope){
         markersProperty: [ ],
 
         /** list of overlays to put in the map */
-        overlaysProperty: [ ],
+        polygonsProperty: [ ],
 
         // These 2 properties will be set when clicking on the map
         clickedLatitudeProperty: null,

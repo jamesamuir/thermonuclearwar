@@ -41,7 +41,7 @@
 
 <body ng-app="myApp">
 
-<img src="./theme/img/mushroom-cloud.jpg" class="bg">
+<!--<img src="./theme/img/mushroom-cloud.jpg" class="bg">-->
 
 <div id="page-wrap">
 
@@ -57,10 +57,11 @@
                 <div class="nav-collapse collapse">
 
 
-                    <form class="navbar-form pull-right">
+                    <form class="navbar-form pull-right" ng-show="location.path() == '/map'">
                         <input class="span2" type="text" placeholder="Location" ng-model="searchText">
                         <button type="submit" class="btn" ng-click="searchLocation()">Search</button>
                     </form>
+
 
 
 
@@ -68,6 +69,11 @@
                         <li ng-class="{active: location.path() == '/home'}"><a href="#/home">Home</a></li>
                         <li ng-class="{active: location.path() == '/map'}"><a href="#/map">Map</a></li>
                         <li ng-class="{active: location.path() == '/contact'}"><a href="#contact">Contact</a></li>
+
+                    </ul>
+
+                    <ul class="nav pull-right">
+
                         <li ng-show="location.path() == '/map'">
                             <a href="#contact" ng-click="setAddMarker($event)" ng-class="{mapToolActive: mapTool == 'mapTool.ADDMARKER'}">Add Marker</a>
                         </li>
@@ -77,6 +83,8 @@
 
 
                     </ul>
+
+
 
                 </div><!--/.nav-collapse -->
             </div>
@@ -101,7 +109,7 @@
 <script src="js/filters.js"></script>
 <script src="js/directives.js"></script>
 <script src="js/util.js"></script>
-<script src="js/bomb.js"></script>
+<script src="js/nuclear.js"></script>
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
 
 
