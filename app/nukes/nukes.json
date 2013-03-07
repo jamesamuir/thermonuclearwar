@@ -1,0 +1,21 @@
+[
+    {"name": "Trinity", "yield": 20, "country": "USA", "description": "First fission device test, first plutonium implosion detonation", "image": "trinity.jpg", "id": "trinity"},
+    {"name": "Little Boy", "yield": 18, "country": "USA", "description": "Bombing of Hiroshima, Japan, first detonation of an enriched uranium gun-type device, first use of a nuclear device in military combat.", "image": "little-boy.jpg", "id": "little-boy"},
+    {"name": "Fat Man", "yield": 23, "country": "USA", "description": "Bombing of Nagasaki, Japan, second and last use of a nuclear device in military combat.", "image": "fat-man.jpg", "id": "fat-man"},
+    {"name": "Baker", "yield": 23, "country": "USA", "description": "First underwater nuclear explosion.", "image": "baker.jpg", "id": "baker"},
+    {"name": "RDS-1", "yield": 22, "country": "USSR", "description": "First fission weapon test by the USSR", "image": "rds-1.jpg", "id": "rds-1"},
+    {"name": "Hurricane", "yield": 25, "country": "UK", "description": "First fission weapon test by the UK", "image": "hurricane.jpg", "id": "hurricane"},
+    {"name": "Ivy Mike", "yield": 10400, "country": "USA", "description": "First cryogenic fusion fuel \"staged\" thermonuclear weapon, primarily a test device and not weaponized", "image": "ivy-mike.jpg", "id": "ivy-mike"},
+    {"name": "Joe 4", "yield": 400, "country": "USSR", "description": "First fusion weapon test by the USSR (not \"staged\")", "image": "joe-4.jpg", "id": "joe-4"},
+    {"name": "Castle Bravo", "yield": 15000, "country": "USA", "description": "First dry fusion fuel \"staged\" thermonuclear weapon; a serious nuclear fallout accident occurred", "image": "castle-bravo.jpg", "id": "castle-bravo"},
+    {"name": "RDS-37", "yield": 1600, "country": "USSR", "description": "First \"staged\" thermonuclear weapon test by the USSR (deployable)", "image": "rds37.jpg", "id": "rds-37"},
+    {"name": "Grapple X", "yield": 1800, "country": "UK", "description": "First (successful) \"staged\" thermonuclear weapon test by the UK", "image": "grapple-x.jpg", "id": "grapple-x"},
+    {"name": "Gerboise Bleue", "yield": 70, "country": "France", "description": "First fission weapon test by France", "image": "gerboise_bleue.jpg", "id": "gerboise-bleue"},
+    {"name": "Tsar Bomba", "yield": 57000, "country": "USSR", "description": "Largest thermonuclear weapon ever tested—scaled down from its initial 100 Mt design by 50%", "image": "tsar-bomba.jpg", "id": "tsar-bomba"},
+    {"name": "596", "yield": 22, "country": "PR China", "description": "First fission weapon test by the People's Republic of China", "image": "596.jpg", "id": "596"},
+    {"name": "Test No. 6", "yield": 3300, "country": "PR China", "description": "First \"staged\" thermonuclear weapon test by the People's Republic of China", "image": "test-6.jpg", "id": "test-no-6"},
+    {"name": "Canopus", "yield": 2600, "country": "France", "description": "First \"staged\" thermonuclear test by France", "image": "canopus.jpg", "id": "canopus"},
+    {"name": "Smiling Buddha", "yield": 12, "country": "India", "description": "First fission nuclear explosive test by India", "image": "buddha.jpg", "id": "smiling-buddha"},
+    {"name": "Pokhran-II", "yield": 60, "country": "India", "description": "First potential fusion/boosted weapon test by India; first deployable fission weapon test by India", "image": "pokhran.jpg", "id": "pokhran-II"},
+    {"name": "Chagai-I", "yield": 40, "country": "Pakistan", "description": "First fission weapon (boosted) test by Pakistan", "image": "chagai-I.jpg", "id": "chagai-I"}
+]

@@ -16,8 +16,8 @@ var googleMapsModule = angular.module("google-maps", []);
 /**
  * Map directive
  */
-googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapToolService", "mapSearchService", function ($log, $timeout,
-                                                                                  $filter, mapToolService, mapSearchService) {
+googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapToolService", "mapSearchService", "nukeService", function ($log, $timeout,
+                                                                                  $filter, mapToolService, mapSearchService, nukeService) {
 
     return {
         restrict: "EC",
@@ -65,6 +65,19 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapTool
                 $scope.map.addMarker($scope.center.lat, $scope.center.lng, mapSearchService.getFormattedAddress());
 
             });
+
+            //Listen for clearMap
+            $scope.$on('clearMap', function(listener) {
+
+                //Clear overlays + markers and reset center + zoom
+                $scope.map.clearMarkers();
+                $scope.map.clearPolygons();
+                $scope.center.lat = 27.50;
+                $scope.center.lng = -98.35;
+                $scope.zoom = 4;
+
+            });
+
 
 
         },
@@ -165,7 +178,9 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapTool
                             }
 
 
-                            var blastPolys = GetBlastPolygons(75000, cm.latitude, cm.longitude);
+
+
+                            var blastPolys = GetBlastPolygons(nukeService.data.selectedNuke, cm.latitude, cm.longitude);
                             angular.forEach(blastPolys, function(p, i){
                                 _m.addPolygon(p);
                             })

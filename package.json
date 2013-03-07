@@ -1,0 +1,23 @@
+{
+  "name": "WAR",
+  "version": "0.0.1",
+  "description": "This project is an application skeleton for a typical [AngularJS](http://angularjs.org/) web app. You can use it to quickly bootstrap your angular webapp projects and dev environment for these projects.",
+  "main": "web.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "events": "~0.5.0",
+    "http": "~0.0.0",
+    "fs": "~0.0.0",
+    "url": "~0.7.9",
+    "util": "~0.4.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "jmuir",
+  "license": "BSD"
+}

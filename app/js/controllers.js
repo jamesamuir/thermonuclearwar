@@ -3,13 +3,28 @@
 /* Controllers */
 
 
-function NavigationCtrl($scope, $location, $http, mapToolService, mapSearchService){
+function NavigationCtrl($scope, $location, $http, mapToolService, mapSearchService, nukeService){
+
     //required to high light the active navigational point
     $scope.location = $location;
 
-    $scope.mapTool = ""
+    $scope.mapTool = "";
 
     $scope.searchResults = "";
+
+
+
+//$scope.nukes = s = nukeService.getNuke
+    /*$http.get('nukes/nukes.json').success(function(data) {
+        $scope.nukes = data;
+    });*/
+
+
+    $scope.data = nukeService.getNukes();
+
+
+
+
 
     //Search location
     $scope.searchLocation = function(){
@@ -37,6 +52,16 @@ function NavigationCtrl($scope, $location, $http, mapToolService, mapSearchServi
 
         this.setMapTool("mapTool.ADDMARKER");
     }
+
+
+    //Clear all markers and overlays, reset center and zoom
+    $scope.setClearMap = function(event){
+        event.preventDefault();
+        nukeService.clearMap();
+    }
+
+
+
 
     $scope.setRemoveMarker = function(event){
         event.preventDefault();

@@ -297,6 +297,12 @@
                 });
             };
 
+            this.clearMarkers = function() {
+                while(_markers[0]){
+                    _markers.pop().setMap(null);
+                }
+            };
+
 
 
 
@@ -304,11 +310,17 @@
 
             //Add polygon to map
             this.addPolygon = function (polygon) {
-
+                _polygons.push(polygon);
                 polygon.setMap(_instance);
                 return polygon;
             };
 
+            //Clear polygons from the map
+            this.clearPolygons = function(){
+                while(_polygons[0]){
+                    _polygons.pop().setMap(null);
+                }
+            }
 
 
 

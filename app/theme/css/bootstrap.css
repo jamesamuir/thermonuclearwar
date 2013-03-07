@@ -37,6 +37,7 @@ html {
     font-size: 100%;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
+
 }
 
 a:focus {
@@ -159,11 +160,11 @@ textarea {
 
 body {
     margin: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-family: 'Ubuntu', sans-serif;font-size: 14px;
     line-height: 20px;
     color: #FFF;
-    background-color: #000;
+    background-color: #252525;
+
 
 
 }
@@ -5733,7 +5734,7 @@ a.badge:hover {
 .hero-unit
 {
     color:#333;
-    padding: 60px;
+    /*padding: 60px;*/
     margin-bottom: 30px;
     background-color: #eeeeee;
     -webkit-border-radius: 6px;
@@ -5837,8 +5838,21 @@ img.bg {
 
 /*****************************************************/
 /**** CUSTOM  ****************************************/
+.hero-carbon{
+    background: url("../img/tnw_hero.png") ;
+    height:260px;
+    width:640px;
+    margin:auto;
+    color:#fff;
+}
+
+.mapTool{
+    font-weight: bold;
+
+}
+
 .mapToolActive{
-    color:#319B13 !important;
+    color:#FF0000 !important;
 }
 
 
