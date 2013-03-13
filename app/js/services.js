@@ -95,29 +95,37 @@ app.factory('mapSearchService', function($rootScope, $http) {
     //Search
     mapSearchService.searchLocation = function(searchText) {
 
-        var url = 'http://maps.googleapis.com/maps/api/geocode/json?address=' + formatAddressString(searchText) + '&sensor=false';
-        //alert(url);
-        $http({method: 'GET', url: url}).
-            success(function(data, status, headers, config) {
-                //alert(status + " | good");
-                //Set address text
-                if (data.status == 'OK'){
-                    mapSearchService.formattedAddress = data.results[0].formatted_address;
+        var geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode( { 'address': searchText}, function(results, status) {
+
+            if (status == google.maps.GeocoderStatus.OK) {
+
+
+                    mapSearchService.formattedAddress = results[0].formatted_address;
 
                     //Set location
-                    var location = data.results[0].geometry.location;
-                    mapSearchService.searchLat = location.lat;
-                    mapSearchService.searchLng = location.lng;
+                    var location = results[0].geometry.location;
 
-                    //alert(lat + " " + lng);
+
+
+                    mapSearchService.searchLat = location.lat();
+                    mapSearchService.searchLng = location.lng();
+
+                    //alert(location.lat());
 
                     $rootScope.$broadcast('updateMapCenter');
-                }
-            }).
-            error(function(data, status, headers, config) {
-                alert(status + " | bad");
-            });
 
+
+
+
+
+
+            }
+            else{
+                alert(status + " | bad");
+            }
+        });
     };
 
     return mapSearchService;

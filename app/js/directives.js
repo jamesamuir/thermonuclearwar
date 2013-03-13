@@ -11,11 +11,15 @@ angular.module('myApp.directives', []).
   }]);
 
 
-var googleMapsModule = angular.module("google-maps", []);
+
+
+
+
 
 /**
  * Map directive
  */
+var googleMapsModule = angular.module("google-maps", []);
 googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapToolService", "mapSearchService", "nukeService", function ($log, $timeout,
                                                                                   $filter, mapToolService, mapSearchService, nukeService) {
 
@@ -50,19 +54,23 @@ googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", "mapTool
             //Listen for update of map center and set it to the new coords
             $scope.$on('updateMapCenter', function(listener) {
 
-                //Get and remove old center marker
-                var marker = $scope.map.findMarker($scope.center.lat, $scope.center.lng)
-                if (marker != null){
-                    var markers = [];
-                    markers.push(marker);
-                    $scope.map.removeMarkers(markers);
-                }
+                    $scope.$apply( function () {
+                        //Get and remove old center marker
+                        var marker = $scope.map.findMarker($scope.center.lat, $scope.center.lng)
+                        if (marker != null){
+                            var markers = [];
+                            markers.push(marker);
+                            $scope.map.removeMarkers(markers);
+                        }
 
-                //Add new center marker
-                $scope.center.lat = mapSearchService.getSearchLat();
-                $scope.center.lng = mapSearchService.getSearchLng();
-                $scope.zoom = 8;
-                $scope.map.addMarker($scope.center.lat, $scope.center.lng, mapSearchService.getFormattedAddress());
+                        //Add new center marker
+                        $scope.map.addMarker(mapSearchService.getSearchLat(), mapSearchService.getSearchLng(), mapSearchService.getFormattedAddress());
+                        $scope.center.lat = mapSearchService.getSearchLat();
+                        $scope.center.lng = mapSearchService.getSearchLng();
+                        $scope.zoom = 8;
+
+                    });
+
 
             });
 
