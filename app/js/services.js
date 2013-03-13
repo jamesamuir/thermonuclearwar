@@ -3,7 +3,7 @@
 app.factory('nukeService', function($rootScope, $http) {
     var nukeService = {};
     nukeService.data = {};
-    nukeService.data.selectedNuke = 12;
+    nukeService.data.selectedNuke = 20;
     nukeService.data.orderProp = "yield";
     nukeService.data.nukeDialogVisible = false;
     nukeService.data.nukes = {};
